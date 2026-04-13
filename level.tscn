@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://ccjq3ybx3iyxy"]
 
+[ext_resource type="PackedScene" uid="uid://bj314xyjwsilf" path="res://platform.tscn" id="1_u52ul"]
+
 [node name="Level" type="Node2D" unique_id=848481452]
 
 [node name="Background" type="Polygon2D" parent="." unique_id=925796937]
@@ -55,56 +57,15 @@ polygon = PackedVector2Array(1240, 0, 1244, 0, 1244, 608, 1240, 608)
 
 [node name="Platforms" type="Node2D" parent="." unique_id=86138007]
 
-[node name="Platform1" type="StaticBody2D" parent="Platforms" unique_id=1449678660]
+[node name="Platform2" parent="Platforms" unique_id=2032573226 instance=ExtResource("1_u52ul")]
+position = Vector2(533, 458.00003)
+rotation = -0.5235988
+scale = Vector2(-327.36813, -25.293167)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform1" unique_id=1252298579]
-polygon = PackedVector2Array(80, 488, 320, 488, 320, 510, 80, 510)
+[node name="Platform" parent="Platforms" unique_id=1007408322 instance=ExtResource("1_u52ul")]
+position = Vector2(247, 559.00006)
+scale = Vector2(286.03265, -100.755554)
 
-[node name="Body" type="Polygon2D" parent="Platforms/Platform1" unique_id=480755573]
-color = Color(0.165, 0.482, 0.671, 1)
-polygon = PackedVector2Array(80, 488, 320, 488, 320, 510, 80, 510)
-
-[node name="Platform2" type="StaticBody2D" parent="Platforms" unique_id=202537175]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2" unique_id=921650140]
-polygon = PackedVector2Array(440, 408, 660, 408, 660, 430, 440, 430)
-
-[node name="Body" type="Polygon2D" parent="Platforms/Platform2" unique_id=320119151]
-color = Color(0.173, 0.596, 0.494, 1)
-polygon = PackedVector2Array(440, 408, 660, 408, 660, 430, 440, 430)
-
-[node name="Platform3" type="StaticBody2D" parent="Platforms" unique_id=710590328]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform3" unique_id=1367071256]
-polygon = PackedVector2Array(760, 328, 980, 328, 980, 350, 760, 350)
-
-[node name="Body" type="Polygon2D" parent="Platforms/Platform3" unique_id=908335841]
-color = Color(0.647, 0.298, 0.196, 1)
-polygon = PackedVector2Array(760, 328, 811.81274, 328, 980, 328, 980, 350, 760, 350)
-
-[node name="Platform4" type="StaticBody2D" parent="Platforms" unique_id=927792387]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform4" unique_id=2063277559]
-polygon = PackedVector2Array(360, 248, 580, 248, 580, 270, 360, 270)
-
-[node name="Body" type="Polygon2D" parent="Platforms/Platform4" unique_id=911167053]
-color = Color(0.671, 0.51, 0.118, 1)
-polygon = PackedVector2Array(360, 248, 580, 248, 580, 270, 360, 270)
-
-[node name="Platform5" type="StaticBody2D" parent="Platforms" unique_id=520894595]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform5" unique_id=554319396]
-polygon = PackedVector2Array(140, 168, 340, 168, 340, 190, 140, 190)
-
-[node name="Body" type="Polygon2D" parent="Platforms/Platform5" unique_id=1420881498]
-color = Color(0.533, 0.196, 0.624, 1)
-polygon = PackedVector2Array(140, 168, 340, 168, 340, 190, 140, 190)
-
-[node name="Platform6" type="StaticBody2D" parent="Platforms" unique_id=193851477]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform6" unique_id=1243934889]
-polygon = PackedVector2Array(900, 208, 1140, 208, 1140, 230, 900, 230)
-
-[node name="Body" type="Polygon2D" parent="Platforms/Platform6" unique_id=465862300]
-color = Color(0.635, 0.196, 0.376, 1)
-polygon = PackedVector2Array(900, 208, 1140, 208, 1140, 230, 900, 230)
+[node name="Platform3" parent="Platforms" unique_id=1093937003 instance=ExtResource("1_u52ul")]
+position = Vector2(1064, 544)
+scale = Vector2(261.74725, 276.05276)
