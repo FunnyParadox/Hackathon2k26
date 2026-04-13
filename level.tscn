@@ -1,71 +1,33 @@
 [gd_scene format=3 uid="uid://ccjq3ybx3iyxy"]
 
-[ext_resource type="PackedScene" uid="uid://bj314xyjwsilf" path="res://platform.tscn" id="1_u52ul"]
+[ext_resource type="Texture2D" uid="uid://dxsnb2cclgijj" path="res://sprites/4xBrickTexture.png" id="1_brick"]
+[ext_resource type="Script" uid="uid://dc4vf0oamf48q" path="res://platforms.gd" id="2_platform"]
 
 [node name="Level" type="Node2D" unique_id=848481452]
 
-[node name="Background" type="Polygon2D" parent="." unique_id=925796937]
-color = Color(0.071, 0.078, 0.114, 1)
-polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 720, 0, 720)
-
-[node name="BackgroundAccent1" type="Polygon2D" parent="." unique_id=440447551]
-color = Color(0.094, 0.106, 0.157, 1)
-polygon = PackedVector2Array(0, 520, 320, 200, 640, 520, 320, 720)
-
-[node name="BackgroundAccent2" type="Polygon2D" parent="." unique_id=544696768]
-color = Color(0.094, 0.106, 0.157, 1)
-polygon = PackedVector2Array(640, 380, 960, 100, 1280, 380, 960, 720)
-
-[node name="Ground" type="StaticBody2D" parent="." unique_id=376765764]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground" unique_id=1946057702]
-polygon = PackedVector2Array(0, 608, 1280, 608, 1280, 720, 0, 720)
-
-[node name="Polygon2D" type="Polygon2D" parent="Ground" unique_id=1165934761]
-color = Color(0.176, 0.188, 0.235, 1)
-polygon = PackedVector2Array(0, 608, 1280, 608, 1280, 720, 0, 720)
-
-[node name="GroundEdge" type="Polygon2D" parent="Ground" unique_id=890134849]
-color = Color(0.278, 0.588, 0.808, 1)
-polygon = PackedVector2Array(0, 608, 1280, 608, 1280, 612, 0, 612)
-
-[node name="LeftWall" type="StaticBody2D" parent="." unique_id=1740807422]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LeftWall" unique_id=2015180834]
-polygon = PackedVector2Array(0, 0, 36, 0, 36, 608, 0, 608)
-
-[node name="Polygon2D" type="Polygon2D" parent="LeftWall" unique_id=1637733080]
-color = Color(0.176, 0.188, 0.235, 1)
-polygon = PackedVector2Array(0, 0, 36, 0, 36, 608, 0, 608)
-
-[node name="LeftWallEdge" type="Polygon2D" parent="LeftWall" unique_id=217413948]
-color = Color(0.278, 0.588, 0.808, 1)
-polygon = PackedVector2Array(36, 0, 40, 0, 40, 608, 36, 608)
-
-[node name="RightWall" type="StaticBody2D" parent="." unique_id=464445151]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RightWall" unique_id=1142003864]
-polygon = PackedVector2Array(1244, 0, 1280, 0, 1280, 608, 1244, 608)
-
-[node name="Polygon2D" type="Polygon2D" parent="RightWall" unique_id=1361778509]
-color = Color(0.176, 0.188, 0.235, 1)
-polygon = PackedVector2Array(1244, 0, 1280, 0, 1280, 608, 1244, 608)
-
-[node name="RightWallEdge" type="Polygon2D" parent="RightWall" unique_id=2136641702]
-color = Color(0.278, 0.588, 0.808, 1)
-polygon = PackedVector2Array(1240, 0, 1244, 0, 1244, 608, 1240, 608)
-
 [node name="Platforms" type="Node2D" parent="." unique_id=86138007]
+script = ExtResource("2_platform")
 
-[node name="Platform2" parent="Platforms" unique_id=2032573226 instance=ExtResource("1_u52ul")]
-position = Vector2(533, 458.00003)
-rotation = -0.5235988
-scale = Vector2(-327.36813, -25.293167)
+[node name="Platform2D" type="StaticBody2D" parent="Platforms" unique_id=411879101]
 
-[node name="Platform" parent="Platforms" unique_id=1007408322 instance=ExtResource("1_u52ul")]
-position = Vector2(247, 559.00006)
-scale = Vector2(286.03265, -100.755554)
+[node name="Body" type="Polygon2D" parent="Platforms/Platform2D" unique_id=655673693]
+texture_repeat = 2
+position = Vector2(0, -720)
+texture = ExtResource("1_brick")
+polygon = PackedVector2Array(0, 0, 80, 0, 80, 448, 384, 448, 640, 336, 1024, 336, 1152, 464, 1280, 464, 1280, 720, 1152, 720, 0, 720)
 
-[node name="Platform3" parent="Platforms" unique_id=1093937003 instance=ExtResource("1_u52ul")]
-position = Vector2(1064, 544)
-scale = Vector2(261.74725, 276.05276)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D" unique_id=2030098056]
+position = Vector2(0, -720)
+polygon = PackedVector2Array(0, 0, 80, 0, 80, 448, 384, 448, 640, 336, 1024, 336, 1152, 464, 1280, 464, 1280, 720, 1152, 720, 0, 720)
+
+[node name="Platform2D2" type="StaticBody2D" parent="Platforms" unique_id=2124001131]
+
+[node name="Body" type="Polygon2D" parent="Platforms/Platform2D2" unique_id=805137290]
+texture_repeat = 2
+position = Vector2(1232, -720)
+texture = ExtResource("1_brick")
+polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 656, 944, 656, 944, 592, 1072, 592, 1072, 528, 1216, 528, 1216, 464, 1328, 464, 1328, 720, 1216, 720, 176, 720)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D2" unique_id=621840519]
+position = Vector2(1232, -720)
+polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 656, 944, 656, 944, 592, 1072, 592, 1072, 528, 1216, 528, 1216, 464, 1328, 464, 1328, 720, 1216, 720, 176, 720)

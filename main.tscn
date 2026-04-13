@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ccjq3ybx3iyxy" path="res://level.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cd266l8j8s6li" path="res://character.tscn" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://ctq00jawa6tmr" path="res://debug.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://ctq00jawa6tmr" path="res://interface.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://tpav4hgcseo" path="res://camera.gd" id="4_1bvp3"]
 
 [node name="Node2D" type="Node2D" unique_id=515637665]
@@ -10,11 +10,11 @@
 [node name="Level" parent="." unique_id=1310026230 instance=ExtResource("1_0xm2m")]
 
 [node name="Character" parent="." unique_id=1458895286 instance=ExtResource("1_ig7tw")]
-position = Vector2(116, 437)
+position = Vector2(130, -271)
 
-[node name="Debug" type="CanvasLayer" parent="." unique_id=1702894873]
+[node name="Interface" type="CanvasLayer" parent="." unique_id=1702894873]
 
-[node name="Control" type="Control" parent="Debug" unique_id=2079032323]
+[node name="Control" type="Control" parent="Interface" unique_id=2079032323]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
