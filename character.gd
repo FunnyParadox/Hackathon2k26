@@ -23,6 +23,8 @@ const BASE_LIVES := 3
 const INVINCIBILITY_TIME := 3.0 # in seconds
 const KNOCKBACK_FORCE := 300.0
 
+const DOWN_SLOPE_CHECK := 24
+
 enum timer_enum { STOP, PLAY, PAUSE }
 var timer_state: timer_enum = timer_enum.STOP
 var timer: float = 0.0
@@ -39,10 +41,18 @@ var last_acceleration := ACCELERATION_LIMIT
 var direction := 1 # -1: left, 1: right
 var previous_is_on_floor := is_on_floor()
 
+var raycast_check := RayCast2D.new()
+
 func _ready() -> void:
 	timer_state = timer_enum.PLAY
 	sprite = get_node("Sprite2D")
 	collision = get_node("CollisionShape2D")
+	raycast_check.enabled = true
+	raycast_check.force_raycast_update()
+	raycast_check.collision_mask = 1 << 0
+
+func _draw():
+	draw_line(Vector2.ZERO, raycast_check.target_position, Color.RED, 2)
 
 func get_correct_gravity(delta: float) -> float:
 	if is_on_floor():
@@ -56,6 +66,11 @@ var bkp_has_super_jumped := 0.0
 func handle_gravity(delta: float, gravity: Vector2) -> void:
 	# Add the gravity.
 	if not is_on_floor():
+		if (has_jumped == jump_enum.NO_JUMP):
+			raycast_check.target_position = transform.y.normalized() * DOWN_SLOPE_CHECK
+			if raycast_check.is_colliding():
+				var collider = raycast_check.get_collider()
+				print("Hit:", collider)
 		air_time += delta
 		velocity += gravity * GRAVITY_FORCE * delta
 		var gravity_speed := velocity.dot(gravity)
