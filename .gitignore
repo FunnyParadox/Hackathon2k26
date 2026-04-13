@@ -1,3 +1,15 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Import metadata (auto-generated)
+*.import
+
+# Export configs (contain machine-specific paths)
+export.cfg
+export_presets.cfg
+
+# Mono/C# (if applicable)
+.mono/
+data_*/
+mono_crash.*.json
