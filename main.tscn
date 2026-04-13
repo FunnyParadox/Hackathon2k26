@@ -1,3 +1,6 @@
 [gd_scene format=3 uid="uid://dnhc75l5u2mu8"]
 
 [node name="Node2D" type="Node2D" unique_id=515637665]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1209398733]
+up_direction = Vector2(0, 1)
