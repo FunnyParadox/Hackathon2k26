@@ -2,8 +2,8 @@ extends Camera2D
 
 const CAMERA_SPEED := 3.0
 const ZOOM_SPEED := 4./9.
-const ZOOM_DEFAULT := Vector2(1.3, 1.3)
-const ZOOM_MIN := Vector2(0.8, 0.8)  # zoomed out at max speed
+const ZOOM_DEFAULT := Vector2(1.5, 1.5)
+const ZOOM_MIN := Vector2(1.0, 1.0)  # zoomed out at max speed
 
 var character: CharacterBody2D
 
