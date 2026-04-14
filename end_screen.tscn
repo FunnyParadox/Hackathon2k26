@@ -7,7 +7,11 @@
 [sub_resource type="GDScript" id="GDScript_ig5kc"]
 script/source = "extends Node2D
 
-# Called when the node enters the scene tree for the first time.
+func _ready():
+	$\"button manager/Restart\".pressed.connect(_on_play_pressed)
+
+func _on_play_pressed():
+	get_tree().change_scene_to_file(\"res://main.tscn\")
 "
 
 [node name="Main Menu" type="Node2D" unique_id=1856754079]
@@ -22,8 +26,8 @@ position = Vector2(2002, 385)
 texture = ExtResource("2_pmjk2")
 
 [node name="LogoCouleurEcodash" type="Sprite2D" parent="." unique_id=490452166]
-position = Vector2(581.99994, 311.99997)
-scale = Vector2(0.30983236, 0.30983236)
+position = Vector2(864, 416)
+scale = Vector2(0.2348267, 0.2348267)
 texture = ExtResource("3_d75mr")
 
 [node name="button manager" type="Control" parent="." unique_id=668756427]
@@ -32,18 +36,16 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Play" type="Button" parent="button manager" unique_id=1920446413]
+[node name="Restart" type="Button" parent="button manager" unique_id=1920446413]
 layout_mode = 0
-offset_left = 288.0
-offset_top = 512.0
-offset_right = 551.0
-offset_bottom = 576.0
-text = "Play"
+offset_left = 800.0
+offset_top = 608.0
+offset_right = 1063.0
+offset_bottom = 672.0
+text = "Restart"
 
-[node name="Skin" type="Button" parent="button manager" unique_id=566510357]
-layout_mode = 0
-offset_left = 672.0
-offset_top = 512.0
-offset_right = 978.0
-offset_bottom = 578.0
-text = "Skin"
+[node name="Label" type="Label" parent="." unique_id=2004511726]
+offset_left = 256.0
+offset_top = 64.0
+offset_right = 1024.0
+offset_bottom = 192.0

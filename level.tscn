@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://platforms.gd" id="2_platform"]
 [ext_resource type="PackedScene" uid="uid://ce1yurhu7pc80" path="res://instances/badguy.tscn" id="3_oi3di"]
 [ext_resource type="PackedScene" uid="uid://bqowm0w24c6jl" path="res://instances/pecan.tscn" id="4_0b4ue"]
+[ext_resource type="Script" uid="uid://qnkfqqd4v3de" path="res://instances/badguy.gd" id="5_1ainy"]
 [ext_resource type="PackedScene" uid="uid://c7krbci3g42hf" path="res://instances/trash.tscn" id="5_f2txt"]
 
 [node name="Level" type="Node2D" unique_id=848481452]
@@ -17,11 +18,11 @@ script = ExtResource("2_platform")
 texture_repeat = 2
 position = Vector2(0, -720)
 texture = ExtResource("2_oi3di")
-polygon = PackedVector2Array(0, 0, 80, 0, 80, 592, 384, 592, 768, 464, 1280, 464, 1280, 720, 1152, 720, 0, 720)
+polygon = PackedVector2Array(0, -976, 96, -976, 96, 560, 416, 560, 800, 464, 1280, 464, 1280, 720, 1152, 720, 0, 720)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D" unique_id=2030098056]
 position = Vector2(0, -720)
-polygon = PackedVector2Array(0, 0, 80, 0, 80, 592, 384, 592, 768, 464, 1280, 464, 1280, 720, 1152, 720, 0, 720)
+polygon = PackedVector2Array(0, -976, 96, -976, 96, 560, 416, 560, 800, 464, 1280, 464, 1280, 720, 1152, 720, 0, 720)
 
 [node name="Platform2D2" type="StaticBody2D" parent="Platforms" unique_id=2124001131]
 
@@ -41,11 +42,11 @@ polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 560, 9
 texture_repeat = 2
 position = Vector2(2576, -722)
 texture = ExtResource("2_oi3di")
-polygon = PackedVector2Array(464, 498, 630, 592, 816, 592, 944, 530, 944, 592, 1072, 592, 1216, 528, 1502, 487, 1502, 722, 1216, 722, 657, 722, 240, 722, 240, 498)
+polygon = PackedVector2Array(464, 496, 640, 592, 816, 592, 944, 528, 944, 592, 1072, 592, 1216, 528, 1504, 496, 1504, 720, 1216, 720, 656, 720, 240, 720, 240, 496)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D3" unique_id=2144738150]
 position = Vector2(2576, -722)
-polygon = PackedVector2Array(464, 498, 630, 592, 816, 592, 944, 530, 944, 592, 1072, 592, 1216, 528, 1502, 487, 1502, 722, 1216, 722, 657, 722, 240, 722, 240, 498)
+polygon = PackedVector2Array(464, 496, 640, 592, 816, 592, 944, 528, 944, 592, 1072, 592, 1216, 528, 1504, 496, 1504, 720, 1216, 720, 656, 720, 240, 720, 240, 496)
 
 [node name="Platform2D4" type="StaticBody2D" parent="Platforms" unique_id=1047233763]
 
@@ -53,11 +54,11 @@ polygon = PackedVector2Array(464, 498, 630, 592, 816, 592, 944, 530, 944, 592, 1
 texture_repeat = 2
 position = Vector2(3988, -720)
 texture = ExtResource("2_oi3di")
-polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1284, 577, 1369, 576, 1572, 518, 1548, 720, 1216, 720, 176, 720)
+polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1296, 576, 1376, 576, 1584, 528, 1552, 720, 1216, 720, 176, 720)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D4" unique_id=468184076]
 position = Vector2(3988, -720)
-polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1284, 577, 1369, 576, 1572, 518, 1548, 720, 1216, 720, 176, 720)
+polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1296, 576, 1376, 576, 1584, 528, 1552, 720, 1216, 720, 176, 720)
 
 [node name="Platform2D5" type="StaticBody2D" parent="Platforms" unique_id=1101346127]
 
@@ -65,11 +66,11 @@ polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 560, 9
 texture_repeat = 2
 position = Vector2(5481, -720)
 texture = ExtResource("2_oi3di")
-polygon = PackedVector2Array(176, 502, 291, 502, 370, 593, 475, 644, 549, 643, 675, 634, 816, 592, 918, 568, 944, 592, 1072, 592, 1216, 528, 1371, 527, 1503, 592, 1495, 720, 1216, 720, 183, 720)
+polygon = PackedVector2Array(176, 512, 288, 512, 368, 592, 480, 656, 560, 640, 672, 640, 816, 592, 928, 576, 944, 592, 1072, 592, 1216, 528, 1376, 528, 1504, 592, 1504, 720, 1216, 720, 192, 720)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D5" unique_id=1925039287]
 position = Vector2(5481, -720)
-polygon = PackedVector2Array(176, 502, 291, 502, 370, 593, 475, 644, 549, 643, 675, 634, 816, 592, 918, 568, 944, 592, 1072, 592, 1216, 528, 1371, 527, 1503, 592, 1495, 720, 1216, 720, 183, 720)
+polygon = PackedVector2Array(176, 512, 288, 512, 368, 592, 480, 656, 560, 640, 672, 640, 816, 592, 928, 576, 944, 592, 1072, 592, 1216, 528, 1376, 528, 1504, 592, 1504, 720, 1216, 720, 192, 720)
 
 [node name="Platform2D6" type="StaticBody2D" parent="Platforms" unique_id=2104561433]
 
@@ -77,11 +78,11 @@ polygon = PackedVector2Array(176, 502, 291, 502, 370, 593, 475, 644, 549, 643, 6
 texture_repeat = 2
 position = Vector2(6915, -718)
 texture = ExtResource("2_oi3di")
-polygon = PackedVector2Array(176, 593, 345, 644, 482, 644, 588, 591, 698, 591, 816, 560, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1347, 498, 1501, 494, 1501, 718, 1216, 720, 189, 718)
+polygon = PackedVector2Array(176, 592, 352, 656, 480, 656, 592, 592, 704, 592, 816, 560, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1344, 496, 1504, 496, 1504, 720, 1216, 720, 192, 720)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D6" unique_id=252467106]
 position = Vector2(6915, -718)
-polygon = PackedVector2Array(176, 593, 345, 644, 482, 644, 588, 591, 698, 591, 816, 560, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1347, 498, 1501, 494, 1501, 718, 1216, 720, 189, 718)
+polygon = PackedVector2Array(176, 592, 352, 656, 480, 656, 592, 592, 704, 592, 816, 560, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1344, 496, 1504, 496, 1504, 720, 1216, 720, 192, 720)
 
 [node name="Platform2D7" type="StaticBody2D" parent="Platforms" unique_id=1449208869]
 
@@ -89,11 +90,11 @@ polygon = PackedVector2Array(176, 593, 345, 644, 482, 644, 588, 591, 698, 591, 8
 texture_repeat = 2
 position = Vector2(8378, -720)
 texture = ExtResource("2_oi3di")
-polygon = PackedVector2Array(166, 464, 432, 464, 640, 593, 780, 621, 835, 622, 880, 592, 944, 591, 1070, 589, 1241, 557, 1369, 487, 1510, 496, 1510, 720, 1216, 720, 166, 720)
+polygon = PackedVector2Array(176, 464, 432, 464, 640, 592, 784, 624, 832, 624, 880, 592, 944, 592, 1072, 592, 1248, 560, 1376, 496, 1520, 496, 1520, 720, 1216, 720, 176, 720)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D7" unique_id=1898789379]
 position = Vector2(8378, -720)
-polygon = PackedVector2Array(166, 464, 432, 464, 640, 593, 780, 621, 835, 622, 880, 592, 944, 591, 1070, 589, 1241, 557, 1369, 487, 1510, 496, 1510, 720, 1216, 720, 166, 720)
+polygon = PackedVector2Array(176, 464, 432, 464, 640, 592, 784, 624, 832, 624, 880, 592, 944, 592, 1072, 592, 1248, 560, 1376, 496, 1520, 496, 1520, 720, 1216, 720, 176, 720)
 
 [node name="Platform2D8" type="StaticBody2D" parent="Platforms" unique_id=626410638]
 
@@ -101,11 +102,11 @@ polygon = PackedVector2Array(166, 464, 432, 464, 640, 593, 780, 621, 835, 622, 8
 texture_repeat = 2
 position = Vector2(9927, -720)
 texture = ExtResource("2_oi3di")
-polygon = PackedVector2Array(185, 560, 461, 518, 602, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1497, 496, 1497, 720, 1209, 720, 185, 720)
+polygon = PackedVector2Array(192, 560, 464, 528, 608, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1504, 496, 1504, 720, 1216, 720, 192, 720)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D8" unique_id=3781970]
 position = Vector2(9927, -720)
-polygon = PackedVector2Array(185, 560, 461, 518, 602, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1497, 496, 1497, 720, 1209, 720, 185, 720)
+polygon = PackedVector2Array(192, 560, 464, 528, 608, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1504, 496, 1504, 720, 1216, 720, 192, 720)
 
 [node name="Platform2D9" type="StaticBody2D" parent="Platforms" unique_id=682210966]
 
@@ -113,11 +114,11 @@ polygon = PackedVector2Array(185, 560, 461, 518, 602, 592, 816, 592, 816, 560, 9
 texture_repeat = 2
 position = Vector2(11362, -720)
 texture = ExtResource("2_oi3di")
-polygon = PackedVector2Array(190, 528, 450, 493, 602, 592, 816, 592, 816, 560, 926, 560, 926, 592, 1072, 592, 1224, 562, 1502, 523, 1502, 720, 925.0624, 720, 190, 720)
+polygon = PackedVector2Array(192, 528, 448, 496, 608, 592, 816, 592, 816, 560, 928, 560, 928, 592, 1072, 592, 1232, 560, 1504, 528, 1504, 720, 928, 720, 192, 720)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D9" unique_id=189205464]
 position = Vector2(11362, -720)
-polygon = PackedVector2Array(190, 528, 450, 493, 602, 592, 816, 592, 816, 560, 926, 560, 926, 592, 1072, 592, 1224, 562, 1502, 523, 1502, 720, 925.0624, 720, 190, 720)
+polygon = PackedVector2Array(192, 528, 448, 496, 608, 592, 816, 592, 816, 560, 928, 560, 928, 592, 1072, 592, 1232, 560, 1504, 528, 1504, 720, 928, 720, 192, 720)
 
 [node name="Platform2D10" type="StaticBody2D" parent="Platforms" unique_id=183631348]
 
@@ -125,23 +126,23 @@ polygon = PackedVector2Array(190, 528, 450, 493, 602, 592, 816, 592, 816, 560, 9
 texture_repeat = 2
 position = Vector2(12963, -722)
 texture = ExtResource("2_oi3di")
-polygon = PackedVector2Array(157, 498, 445, 498, 602, 592, 792, 635, 911, 635, 1085, 594, 1217, 552, 1333, 583, 1391, 582, 1502, 551, 1501, 722, 1213, 722, 157, 722)
+polygon = PackedVector2Array(160, 496, 448, 496, 608, 592, 800, 640, 912, 640, 1088, 592, 1216, 560, 1344, 592, 1392, 592, 1504, 560, 1504, 720, 1216, 720, 160, 720)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D10" unique_id=1927035336]
 position = Vector2(12963, -722)
-polygon = PackedVector2Array(157, 498, 445, 498, 602, 592, 792, 635, 911, 635, 1085, 594, 1217, 552, 1333, 583, 1391, 582, 1502, 551, 1501, 722, 1213, 722, 157, 722)
+polygon = PackedVector2Array(160, 496, 448, 496, 608, 592, 800, 640, 912, 640, 1088, 592, 1216, 560, 1344, 592, 1392, 592, 1504, 560, 1504, 720, 1216, 720, 160, 720)
 
 [node name="Platform2D11" type="StaticBody2D" parent="Platforms" unique_id=1947820408]
 
 [node name="Body" type="Polygon2D" parent="Platforms/Platform2D11" unique_id=188180560]
 texture_repeat = 2
-position = Vector2(14605, -724)
+position = Vector2(14560, -736)
 texture = ExtResource("2_oi3di")
-polygon = PackedVector2Array(179, 564, 467, 564, 595, 596, 819, 596, 819, 564, 883, 532, 947, 564, 1011, 532, 1075, 564, 1139, 532, 1203, 564, 1491, 500, 1491, 724, 1203, 724, 179, 724)
+polygon = PackedVector2Array(176, 576, 464, 576, 592, 608, 816, 608, 816, 576, 880, 544, 944, 576, 1008, 544, 1072, 576, 1136, 544, 1200, 576, 1488, 512, 1779, 276, 1900.1108, -12.80249, 1952, -672, 2176, -672, 2163, 724, 1488, 736, 1200, 736, 176, 736)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D11" unique_id=414753885]
-position = Vector2(14605, -724)
-polygon = PackedVector2Array(179, 564, 467, 564, 595, 596, 819, 596, 819, 564, 883, 532, 947, 564, 1011, 532, 1075, 564, 1139, 532, 1203, 564, 1491, 500, 1491, 724, 1203, 724, 179, 724)
+position = Vector2(14560, -736)
+polygon = PackedVector2Array(176, 576, 464, 576, 592, 608, 816, 608, 816, 576, 880, 544, 944, 576, 1008, 544, 1072, 576, 1136, 544, 1200, 576, 1488, 512, 1779, 276, 1900.1108, -12.80249, 1952, -672, 2176, -672, 2163, 724, 1488, 736, 1200, 736, 176, 736)
 
 [node name="Badguy" parent="." unique_id=254324874 instance=ExtResource("3_oi3di")]
 position = Vector2(2000, -130)
@@ -151,9 +152,6 @@ position = Vector2(3291, -133)
 
 [node name="Badguy3" parent="." unique_id=500270210 instance=ExtResource("3_oi3di")]
 position = Vector2(4713, -133)
-
-[node name="Badguy4" parent="." unique_id=1440863565 instance=ExtResource("3_oi3di")]
-position = Vector2(5312, -145)
 
 [node name="Badguy5" parent="." unique_id=724784708 instance=ExtResource("3_oi3di")]
 position = Vector2(6111, -90)
@@ -172,9 +170,6 @@ position = Vector2(10599, -139)
 
 [node name="Badguy11" parent="." unique_id=774094824 instance=ExtResource("3_oi3di")]
 position = Vector2(10993, -150)
-
-[node name="Badguy12" parent="." unique_id=392437361 instance=ExtResource("3_oi3di")]
-position = Vector2(11685, -228)
 
 [node name="Badguy13" parent="." unique_id=1483920150 instance=ExtResource("3_oi3di")]
 position = Vector2(12114, -170)
@@ -195,49 +190,60 @@ position = Vector2(15072, -160)
 position = Vector2(15488, -192)
 
 [node name="Pecan" parent="." unique_id=1368614021 instance=ExtResource("4_0b4ue")]
-position = Vector2(5664, -1024)
+position = Vector2(5632, -864)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D2" parent="." unique_id=513679478 instance=ExtResource("4_0b4ue")]
 position = Vector2(7424, -1024)
-
-[node name="CharacterBody2D3" parent="." unique_id=403286100 instance=ExtResource("4_0b4ue")]
-position = Vector2(9472, -1024)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D4" parent="." unique_id=2040603070 instance=ExtResource("4_0b4ue")]
 position = Vector2(9856, -1248)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D5" parent="." unique_id=1301542437 instance=ExtResource("4_0b4ue")]
 position = Vector2(9984, -1024)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D6" parent="." unique_id=1991469068 instance=ExtResource("4_0b4ue")]
 position = Vector2(9600, -1248)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D7" parent="." unique_id=1153430646 instance=ExtResource("4_0b4ue")]
 position = Vector2(9728, -1024)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D" parent="." unique_id=124053094 instance=ExtResource("4_0b4ue")]
 position = Vector2(13120, -2048)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D8" parent="." unique_id=1633159265 instance=ExtResource("4_0b4ue")]
 position = Vector2(13056, -1024)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D9" parent="." unique_id=585762687 instance=ExtResource("4_0b4ue")]
 position = Vector2(13184, -1024)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D10" parent="." unique_id=1297001570 instance=ExtResource("4_0b4ue")]
-position = Vector2(16128, -1024)
+position = Vector2(16064, -1024)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D11" parent="." unique_id=127026334 instance=ExtResource("4_0b4ue")]
-position = Vector2(16512, -1248)
+position = Vector2(16352, -1248)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D12" parent="." unique_id=643044958 instance=ExtResource("4_0b4ue")]
-position = Vector2(16640, -1024)
+position = Vector2(16448, -1024)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D13" parent="." unique_id=1206372592 instance=ExtResource("4_0b4ue")]
-position = Vector2(16256, -1248)
+position = Vector2(16160, -1248)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D14" parent="." unique_id=241701468 instance=ExtResource("4_0b4ue")]
-position = Vector2(16384, -1024)
+position = Vector2(16256, -1024)
+script = ExtResource("5_1ainy")
 
 [node name="CharacterBody2D15" parent="." unique_id=1311291977 instance=ExtResource("5_f2txt")]
 position = Vector2(1472, -288)

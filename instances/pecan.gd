@@ -50,22 +50,20 @@ func _process(delta: float) -> void:
 		queue_free()
 		return
 
-	# Animate sprite frames
+	# Wing flapping animation
 	flip_timer += delta
-	if flip_timer > 0.15:
+	if flip_timer > 0.7:
 		flip_timer = 0.0
-		flip += 1
-		flip %= 4
+		flip = 1 - flip
+	sprite.texture = preload("res://sprites/Pecan1.png") if flip == 0 else preload("res://sprites/Pecan2.png")
 
-	# Wing flapping animation using the same BadGuy textures
-	if ((flip >> 1) & 1):
-		sprite.texture = preload("res://sprites/BadGuy1.png") if (flip & 1) else preload("res://sprites/BadGuy2.png")
-	else:
-		sprite.texture = preload("res://sprites/BadGuy3.png") if (flip & 1) else preload("res://sprites/BadGuy4.png")
-
-	# Face the player
+	# Rotate sprite toward the player, never on its back
 	if player and is_instance_valid(player):
-		sprite.flip_h = player.global_position.x < global_position.x
+		var to_player = (player.global_position - global_position).normalized()
+		sprite.flip_h = to_player.x < 0
+		var angle = atan2(to_player.y, abs(to_player.x))
+		angle = clamp(angle, -PI / 2, PI / 2)
+		sprite.rotation = lerp_angle(sprite.rotation, angle, delta * 5.0)
 
 func _is_in_camera_x_view() -> bool:
 	if camera == null or not is_instance_valid(camera):

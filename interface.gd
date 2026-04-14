@@ -5,6 +5,8 @@ var character: CharacterBody2D
 var finish_timer := 0.0
 var death_timer := 0.0
 
+var font = ThemeDB.fallback_font
+
 func _ready() -> void:
 	character = get_node("../../Character")
 	print("Character object: ", character)
@@ -15,22 +17,31 @@ func _process(delta: float) -> void:
 	if (!character):
 		death_timer += delta
 	queue_redraw()  # triggers _draw() every frame
-	print("death: ", death_timer)
 	if (death_timer > 3.0 or Input.is_action_just_pressed("Reset")):
 		get_tree().change_scene_to_file("res://main.tscn")
 
 func _draw() -> void:
-	draw_all_debug_data(16.0, Vector2(148, 16.0))
+	
+	if (death_timer > 0.0):
+		var text: String = " RESETTING THE LEVEL IN %01.2f " % [3.0 - death_timer]
+		var rect: Rect2
+		rect.position = (get_viewport_rect().size - font.get_string_size(text, HORIZONTAL_ALIGNMENT_CENTER, -1, 64)) / 2
+		rect.position.y -= font.get_string_size(text, HORIZONTAL_ALIGNMENT_CENTER, -1, 64).y / 1.5
+		rect.size = font.get_string_size(text, HORIZONTAL_ALIGNMENT_CENTER, -1, 64)
+		draw_rect(rect, Color.BLACK, true)
+		draw_string(font, (get_viewport_rect().size - font.get_string_size(text, HORIZONTAL_ALIGNMENT_CENTER, -1, 64)) / 2, text, HORIZONTAL_ALIGNMENT_CENTER, -1, 64)
+	
+	draw_all_debug_data(32.0, Vector2(172, 32.0))
 
 func draw_debug_data(title: String, data: String, font_size: float, text_position: Array[Vector2]) -> void:
-	var font = ThemeDB.fallback_font
-	title += " : "
+	title += ": "
 	var rect: Rect2
-	rect.position = text_position[0] - font.get_string_size(title)
-	rect.size = font.get_string_size(title)
-	rect.size.x += font.get_string_size(data).x
+	rect.position = text_position[0] - font.get_string_size(title, HORIZONTAL_ALIGNMENT_RIGHT, -1, font_size)
+	rect.size = font.get_string_size(title, HORIZONTAL_ALIGNMENT_RIGHT, -1, font_size)
+	rect.size.x += font.get_string_size(data, HORIZONTAL_ALIGNMENT_RIGHT, -1, font_size).x
+	rect.size.y *= 1.1
 	draw_rect(rect, Color.BLACK, true)
-	draw_string(font, text_position[0] - Vector2(font.get_string_size(title).x, 0), title, HORIZONTAL_ALIGNMENT_RIGHT, -1, font_size)
+	draw_string(font, text_position[0] - Vector2(font.get_string_size(title, HORIZONTAL_ALIGNMENT_RIGHT, -1, font_size).x, 0), title, HORIZONTAL_ALIGNMENT_RIGHT, -1, font_size)
 	draw_string(font, text_position[0], data, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 	text_position[0].y += font_size * 1.5
 
@@ -47,6 +58,6 @@ func draw_all_debug_data(font_size: float, position: Vector2) -> void:
 		draw_debug_data("Throwing", str("%03d%%" % [character.throwing_frames * 100.0]), font_size, text_position)
 		draw_debug_data("Invincible", str("%0.3f / %0.3f (%03d%%)" % [character.invincible_frames, character.INVINCIBILITY_TIME, int(min(character.invincible_frames / character.INVINCIBILITY_TIME, 1.0) * 100.0)]), font_size, text_position)
 		draw_debug_data("", "", font_size, text_position)
-	draw_debug_data("Lives", str(character.lives), font_size, text_position)
-	draw_debug_data("Timer", str("%0.2f" % [character.timer]), font_size, text_position)
-	draw_debug_data("Collected", str("%d" % [character.collected]), font_size, text_position)
+	draw_debug_data(" Lives ", str(character.lives), font_size, text_position)
+	draw_debug_data(" Timer ", str("%0.2f" % [character.timer]), font_size, text_position)
+	draw_debug_data(" Collected ", str("%d" % [character.collected]), font_size, text_position)

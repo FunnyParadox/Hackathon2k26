@@ -1,22 +1,22 @@
 [gd_scene format=3 uid="uid://bqowm0w24c6jl"]
 
 [ext_resource type="Script" uid="uid://w2i723trqtuh" path="res://instances/pecan.gd" id="1_7d3mq"]
-[ext_resource type="Texture2D" uid="uid://dfxar5k0maoar" path="res://sprites/BadGuy1.png" id="2_2clpv"]
+[ext_resource type="Texture2D" uid="uid://ce7bpa3eed3vq" path="res://sprites/Pecan.png" id="2_7d3mq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_duq4i"]
-radius = 23.16
-height = 65.25
+radius = 32.0
+height = 64.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1562016288]
 collision_layer = 4
 script = ExtResource("1_7d3mq")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1022788051]
-position = Vector2(0, -39.999996)
+position = Vector2(0, -1.6155871e-27)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_2clpv")
+texture = ExtResource("2_7d3mq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=652912584]
-position = Vector2(0, -32)
+rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_duq4i")
 debug_color = Color(1, 0, 1, 0.42000002)

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://sy61oi1ps28a" path="res://sprites/Background_Layer1.png" id="2_272bh"]
 [ext_resource type="Script" uid="uid://ctq00jawa6tmr" path="res://interface.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://tpav4hgcseo" path="res://camera.gd" id="4_1bvp3"]
-[ext_resource type="Script" uid="uid://csih4buint03o" path="res://background.gd" id="7_5vw27"]
+[ext_resource type="Script" path="res://background.gd" id="7_5vw27"]
 
 [node name="Node2D" type="Node2D" unique_id=515637665]
 

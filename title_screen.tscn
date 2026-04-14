@@ -38,16 +38,8 @@ offset_bottom = 40.0
 
 [node name="Play" type="Button" parent="button manager" unique_id=1920446413]
 layout_mode = 0
-offset_left = 288.0
-offset_top = 512.0
-offset_right = 551.0
-offset_bottom = 576.0
+offset_left = 448.0
+offset_top = 544.0
+offset_right = 832.0
+offset_bottom = 608.0
 text = "Play"
-
-[node name="Skin" type="Button" parent="button manager" unique_id=566510357]
-layout_mode = 0
-offset_left = 672.0
-offset_top = 512.0
-offset_right = 978.0
-offset_bottom = 578.0
-text = "Skin"
