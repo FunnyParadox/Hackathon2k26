@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dqd4aaxh4o1sh"]
+
+[ext_resource type="Script" uid="uid://d2lr405cemaim" path="res://node_2d.gd" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://bylafwff8v5vl" path="res://menu/fond_ciel_niveau_un.png" id="2_0hol4"]
+[ext_resource type="Texture2D" uid="uid://dqwi68y52bsiy" path="res://menu/fond_ville_niveau_un.png" id="3_q6r6c"]
+[ext_resource type="Texture2D" uid="uid://6g6jbo4grwkb" path="res://menu/logo_couleur_ecodash.png" id="4_kdubu"]
+
+[node name="Main Menu" type="Node2D" unique_id=1856754079]
+script = ExtResource("1_wtcfe")
+
+[node name="FondCielNiveauUn" type="Sprite2D" parent="." unique_id=1046451656]
+position = Vector2(2002, 501)
+texture = ExtResource("2_0hol4")
+
+[node name="FondVilleNiveauUn" type="Sprite2D" parent="." unique_id=895552412]
+position = Vector2(2002, 385)
+texture = ExtResource("3_q6r6c")
+
+[node name="LogoCouleurEcodash" type="Sprite2D" parent="." unique_id=490452166]
+position = Vector2(581.99994, 311.99997)
+scale = Vector2(0.30983236, 0.30983236)
+texture = ExtResource("4_kdubu")
+
+[node name="button manager" type="Control" parent="." unique_id=668756427]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="start" type="Button" parent="button manager" unique_id=1920446413]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 525.0
+offset_right = 526.0
+offset_bottom = 589.0
+text = "Jouer"
+
+[node name="Button" type="Button" parent="button manager" unique_id=566510357]
+layout_mode = 0
+offset_left = 678.0
+offset_top = 519.0
+offset_right = 984.0
+offset_bottom = 585.0
+text = "Skin"
