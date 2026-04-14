@@ -2,8 +2,12 @@ extends CharacterBody2D
 
 var sprite: Sprite2D
 
+var only_down := true
+
 const SPEED = 100.0
 const JUMP_VELOCITY = -160.0
+
+var life_time := 0.0
 
 var direction := -1
 var change_dir := 0.0
@@ -46,22 +50,28 @@ func _wrap_around_camera() -> void:
 	var top := cam_pos.y - visible_size.y / 2
 	var bottom := cam_pos.y + visible_size.y / 2
 
-	if global_position.y > bottom + WRAP_MARGIN:
+	while global_position.y > bottom + WRAP_MARGIN:
 		global_position.y = top - WRAP_MARGIN
 
 func _physics_process(delta: float) -> void:
+	life_time += delta
 	# Add the gravity.
-	if is_on_floor():
-		if (slowdown > 0.1):
-			if (slowdown > PI / 12.0):
-				velocity.y = JUMP_VELOCITY
-				direction = -direction
+	if !only_down:
+		if is_on_floor():
+			if (slowdown > 0.1):
+				if (slowdown > PI / 12.0):
+					velocity.y = JUMP_VELOCITY
+					direction = -direction
+			else:
+				slowdown = 0
 		else:
-			slowdown = 0
+			velocity += get_gravity() * delta
+		slowdown = move_toward(slowdown, 0.0, delta / 1.5)
+		velocity.x = move_toward(velocity.x, 0.0, abs(velocity.x) * delta * 2.0)
 	else:
 		velocity += get_gravity() * delta
-	slowdown = move_toward(slowdown, 0.0, delta / 1.5)
-	velocity.x = move_toward(velocity.x, 0.0, abs(velocity.x) * delta * 2.0)
+	velocity.x = clamp(velocity.x, -randf_range(1800, 2300), randf_range(1800, 2300))
+	velocity.y = clamp(velocity.y, -randf_range(1800, 2300), randf_range(1800, 2300))
 
 	move_and_slide()
 	_wrap_around_camera()

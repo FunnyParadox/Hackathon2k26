@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cvsbormqercpp"]
+
+[ext_resource type="Texture2D" uid="uid://bylafwff8v5vl" path="res://menu/fond_ciel_niveau_un.png" id="2_hafda"]
+[ext_resource type="Texture2D" uid="uid://dqwi68y52bsiy" path="res://menu/fond_ville_niveau_un.png" id="3_tpml5"]
+[ext_resource type="Texture2D" uid="uid://6g6jbo4grwkb" path="res://menu/logo_couleur_ecodash.png" id="4_jqemp"]
+
+[sub_resource type="GDScript" id="GDScript_ig5kc"]
+script/source = "extends Node2D
+
+func _ready():
+	$\"button manager/Play\".pressed.connect(_on_play_pressed)
+
+func _on_play_pressed():
+	get_tree().change_scene_to_file(\"res://main.tscn\")
+"
+
+[node name="Main Menu" type="Node2D" unique_id=1856754079]
+script = SubResource("GDScript_ig5kc")
+
+[node name="FondCielNiveauUn" type="Sprite2D" parent="." unique_id=1046451656]
+position = Vector2(2002, 501)
+texture = ExtResource("2_hafda")
+
+[node name="FondVilleNiveauUn" type="Sprite2D" parent="." unique_id=895552412]
+position = Vector2(2002, 385)
+texture = ExtResource("3_tpml5")
+
+[node name="LogoCouleurEcodash" type="Sprite2D" parent="." unique_id=490452166]
+position = Vector2(581.99994, 311.99997)
+scale = Vector2(0.30983236, 0.30983236)
+texture = ExtResource("4_jqemp")
+
+[node name="button manager" type="Control" parent="." unique_id=668756427]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Play" type="Button" parent="button manager" unique_id=1920446413]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 512.0
+offset_right = 551.0
+offset_bottom = 576.0
+text = "Play"
+
+[node name="Skin" type="Button" parent="button manager" unique_id=566510357]
+layout_mode = 0
+offset_left = 672.0
+offset_top = 512.0
+offset_right = 978.0
+offset_bottom = 578.0
+text = "Skin"

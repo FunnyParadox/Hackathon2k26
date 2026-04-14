@@ -24,7 +24,7 @@ const COYOTE_JUMP := sqrt(2)/10
 const BASE_LIVES := 3
 const INVINCIBILITY_TIME := 3.0 # in seconds
 const THROW_RADIUS := 700.0
-const KNOCKBACK_FORCE := 300.0
+const KNOCKBACK_FORCE := 600.0
 
 const DOWN_SLOPE_CHECK := 24
 
@@ -42,6 +42,7 @@ var air_time := 0.0
 var jump_force := 0.0
 enum jump_enum { NO_JUMP, JUMP, SUPER_JUMP }
 var has_jumped: jump_enum = jump_enum.NO_JUMP
+var is_knocked := false
 var gravity_angle := 0.0
 var last_acceleration := ACCELERATION_LIMIT
 var direction := 1 # -1: left, 1: right
@@ -55,18 +56,18 @@ func _ready() -> void:
 	sprite = get_node("Sprite2D")
 	skate_sprite = get_node("Sprite2DSkate")
 	collision = get_node("CollisionShape2D")
+	add_child(raycast_check)
 	raycast_check.enabled = true
-	raycast_check.force_raycast_update()
 	raycast_check.collision_mask = 1 << 0
 	get_node("CollectArea").body_entered.connect(_on_collect_body_entered)
 
 func _on_collect_body_entered(body: Node2D) -> void:
 	if body.is_in_group("collectibles"):
-		body.kill()
-		collected += 1
-
-func _draw():
-	draw_line(Vector2.ZERO, raycast_check.target_position, Color.RED, 2)
+		if body.life_time >= 0.3:
+			body.kill()
+			collected += 1
+	if body.is_in_group("enemies"):
+		take_damage(body.position)
 
 func get_correct_gravity(delta: float) -> float:
 	if is_on_floor():
@@ -78,13 +79,9 @@ func get_correct_gravity(delta: float) -> float:
 
 var bkp_has_super_jumped := 0.0
 func handle_gravity(delta: float, gravity: Vector2) -> void:
+	if is_knocked:  return
 	# Add the gravity.
 	if not is_on_floor():
-		if (has_jumped == jump_enum.NO_JUMP):
-			raycast_check.target_position = transform.y.normalized() * DOWN_SLOPE_CHECK
-			if raycast_check.is_colliding():
-				var collider = raycast_check.get_collider()
-				print("Hit:", collider)
 		air_time += delta
 		velocity += gravity * GRAVITY_FORCE * delta
 		var gravity_speed := velocity.dot(gravity)
@@ -108,8 +105,25 @@ func handle_jump(delta: float, gravity: Vector2) -> void:
 		jump_force = min(jump_force + delta / JUMP_CHARGE_SPEED, 1.0)
 	else:
 		jump_force = 0
+	if (has_jumped == jump_enum.NO_JUMP and !is_knocked):
+		raycast_check.target_position = Vector2(0, DOWN_SLOPE_CHECK)
+		raycast_check.force_raycast_update()
+		if raycast_check.is_colliding():
+			var collision_point := raycast_check.get_collision_point()
+			var collision_normal := raycast_check.get_collision_normal()
+			# Snap to floor and align with slope
+			global_position = collision_point
+			gravity_angle = collision_normal.angle() + PI / 2
+			# Remove downward velocity, keep movement along the slope
+			var gravity_component := velocity.dot(gravity)
+			if gravity_component > 0:
+				velocity -= gravity * gravity_component
+			air_time = 0
+			return
 
 func handle_acceleration(delta: float, floor_speed: float) -> float:
+	if is_knocked:
+		return floor_speed
 	if is_on_floor():
 		floor_speed += sin(gravity_angle) * GRAVITY_SLOPE_FORCE * delta
 	if air_time < COYOTE_JUMP and (Input.is_action_just_pressed("AccelerateLeft") or Input.is_action_just_pressed("AccelerateRight")):
@@ -169,17 +183,34 @@ func ground_corner_correction(delta: float, floor_dir: Vector2, pre_velocity: Ve
 				move_and_slide()
 				break
 
-func take_damage(floor_dir: Vector2) -> void:
+func take_damage(pos: Vector2) -> void:
 	if invincible_frames >= 0: return
 	lives -= 1
+	is_knocked = true
+	@warning_ignore("narrowing_conversion")
+	var wall_side := signi(global_position.x - pos.x)
 	velocity.y -= KNOCKBACK_FORCE
-	var wall_side := get_wall_normal().dot(floor_dir)
 	velocity.x = KNOCKBACK_FORCE * (-1 if wall_side < 0 else 1)
 	invincible_frames = INVINCIBILITY_TIME
 	print(invincible_frames)
 	if lives <= 0:
 		# TODO: handle death (respawn, game over, etc.)
 		pass
+
+const TrashScene = preload("res://instances/trash.tscn")
+
+func death() -> void:
+	for i in 12:
+		var trash = TrashScene.instantiate()
+		trash.global_position = global_position
+		trash.rotation = randf() * TAU
+		# Ring burst like Sonic — evenly spaced angles with random speed variation
+		var base_angle = (TAU / 10.0) * i + randf_range(-0.2, 0.2)
+		var speed = randf_range(400.0, 1600.0)
+		trash.velocity = Vector2(cos(base_angle) * speed * 0.3, sin(base_angle) * speed * 0.55 - 350.0)
+		trash.only_down = false
+		get_tree().current_scene.add_child(trash)
+	queue_free()
 
 func animation_acceleration() -> void:
 	if (last_acceleration >= ACCELERATION_LIMIT): return
@@ -270,11 +301,24 @@ func _physics_process(delta: float) -> void:
 	handle_jump(delta, gravity)
 	handle_throw(delta)
 
-	var floor_speed := handle_acceleration(delta, velocity.dot(floor_dir))
-	velocity = gravity * velocity.dot(gravity) + floor_dir * floor_speed
+	if !is_knocked:
+		var floor_speed := handle_acceleration(delta, velocity.dot(floor_dir))
+		velocity = gravity * velocity.dot(gravity) + floor_dir * floor_speed
+	else:
+		# Apply only gravity, do NOT rebuild velocity
+		velocity += gravity * GRAVITY_FORCE * delta
 
 	var pre_velocity := velocity
 	move_and_slide()
-	previous_is_on_floor = is_on_floor()
+	if is_on_floor():
+		is_knocked = false
+		previous_is_on_floor = true
+	else:
+		previous_is_on_floor = false
 
 	ground_corner_correction(delta, floor_dir, pre_velocity, gravity)
+	
+	if global_position.y > 0:
+		lives = 0
+	if (!lives):
+		death()
