@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 			if not body:
 				body = Polygon2D.new()
 				body.name = "Body"
-				body.texture = preload("res://sprites/4xBrickTexture.png")
+				body.texture = preload("res://sprites/4xGrayTexture.png")
 				body.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 				child.add_child(body)
 				body.owner = owner if owner else self

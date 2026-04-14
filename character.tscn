@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dn15vmbp5xexw" path="res://character.gd" id="1_glpr6"]
 [ext_resource type="Texture2D" uid="uid://cf1fcy7xre86u" path="res://sprites/SkateuseBase.png" id="2_sprite"]
+[ext_resource type="Texture2D" uid="uid://b8jgn37ukwobb" path="res://sprites/Skate.png" id="3_wa5vi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjt0s"]
 radius = 35.0
@@ -19,3 +20,9 @@ texture = ExtResource("2_sprite")
 position = Vector2(0, -54.375)
 shape = SubResource("CapsuleShape2D_pjt0s")
 debug_color = Color(1, 0, 1, 0.42000002)
+
+[node name="Sprite2DSkate" type="Sprite2D" parent="." unique_id=600729379]
+visible = false
+position = Vector2(0, -68.096)
+scale = Vector2(0.034, 0.034)
+texture = ExtResource("3_wa5vi")

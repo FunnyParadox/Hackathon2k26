@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ce1yurhu7pc80"]
+
+[ext_resource type="Texture2D" uid="uid://dfxar5k0maoar" path="res://sprites/BadGuy1.png" id="1_duq4i"]
+[ext_resource type="Script" uid="uid://qnkfqqd4v3de" path="res://instances/badguy.gd" id="1_l44iw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_duq4i"]
+radius = 23.16
+height = 65.25
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1562016288]
+script = ExtResource("1_l44iw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1022788051]
+position = Vector2(0, -39.999996)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_duq4i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=652912584]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_duq4i")
+debug_color = Color(1, 0, 1, 0.42000002)

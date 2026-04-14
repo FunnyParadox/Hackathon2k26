@@ -31,6 +31,7 @@ var timer: float = 0.0
 
 var lives: int = BASE_LIVES
 var invincible_frames := -1.0
+var throwing_frames := 0.0
 
 var air_time := 0.0
 var jump_force := 0.0

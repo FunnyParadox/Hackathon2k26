@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cmncc40mfbih1"]
+
+[ext_resource type="Texture2D" uid="uid://bf6aoaahmednx" path="res://sprites/Background_Layer2.png" id="1_i7s6n"]
+[ext_resource type="Script" uid="uid://csih4buint03o" path="res://background.gd" id="1_xehqc"]
+[ext_resource type="Texture2D" uid="uid://sy61oi1ps28a" path="res://sprites/Background_Layer1.png" id="2_xehqc"]
+
+[node name="Background" type="ParallaxBackground" unique_id=1003587042]
+script = ExtResource("1_xehqc")
+
+[node name="BackgroundLayer2" type="Sprite2D" parent="." unique_id=1273903563]
+position = Vector2(1500, 300)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_i7s6n")
+
+[node name="BackgroundLayer1" type="Sprite2D" parent="." unique_id=1395200917]
+position = Vector2(1500, 300)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_xehqc")
