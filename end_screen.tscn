@@ -1,14 +1,53 @@
-[gd_scene format=3 uid="uid://b2svkh6q78fcc"]
+[gd_scene format=3 uid="uid://cy1i4nss8q5hy"]
 
 [ext_resource type="Texture2D" uid="uid://bylafwff8v5vl" path="res://menu/fond_ciel_niveau_un.png" id="1_xu7hh"]
 [ext_resource type="Texture2D" uid="uid://dqwi68y52bsiy" path="res://menu/fond_ville_niveau_un.png" id="2_pmjk2"]
 [ext_resource type="Texture2D" uid="uid://6g6jbo4grwkb" path="res://menu/logo_couleur_ecodash.png" id="3_d75mr"]
+[ext_resource type="Texture2D" uid="uid://cfmqjn10gigag" path="res://sprites/bronze_medal.png" id="4_kaxt3"]
+[ext_resource type="Texture2D" uid="uid://h0j3oq1led56" path="res://sprites/silver_medal.png" id="5_2afhe"]
+[ext_resource type="Texture2D" uid="uid://bwg47asdi0x3c" path="res://sprites/gold_medal.png" id="6_nbj2a"]
+[ext_resource type="Texture2D" uid="uid://d37202amk4qud" path="res://sprites/trash_medal.png" id="7_f33ud"]
 
 [sub_resource type="GDScript" id="GDScript_ig5kc"]
 script/source = "extends Node2D
 
+const GOLD_TIME := 150.0   # 2m30
+const SILVER_TIME := 290.0 # 4m50
+const BRONZE_TIME := 400.0 # 6m40
+
+func format_time(seconds: float) -> String:
+	var mins := int(seconds) / 60
+	var secs := int(seconds) % 60
+	var ms := int((seconds - int(seconds)) * 100)
+	return \"%d:%02d.%02d\" % [mins, secs, ms]
+
 func _ready():
 	$\"button manager/Restart\".pressed.connect(_on_play_pressed)
+
+	var player_time: float = kd.player_time
+	
+	if (player_time <= GOLD_TIME):
+		$YourMedal.texture = preload(\"res://sprites/gold_medal.png\")
+	elif (player_time <= SILVER_TIME):
+		$YourMedal.texture = preload(\"res://sprites/silver_medal.png\")
+	elif (player_time <= BRONZE_TIME):
+		$YourMedal.texture = preload(\"res://sprites/bronze_medal.png\")
+	else:
+		$YourMedal.texture = preload(\"res://sprites/trash_medal.png\")
+
+	$PlayerTime/Label.text = format_time(player_time)
+	$GoldTime/Label.text = format_time(GOLD_TIME)
+	$SilverTime/Label.text = format_time(SILVER_TIME)
+	$BronzeTime/Label.text = format_time(BRONZE_TIME)
+
+	if player_time <= GOLD_TIME:
+		$PlayerTime.color = Color(1.0, 0.84, 0.0, 0.6)
+	elif player_time <= SILVER_TIME:
+		$PlayerTime.color = Color(0.75, 0.75, 0.75, 0.6)
+	elif player_time <= BRONZE_TIME:
+		$PlayerTime.color = Color(0.8, 0.5, 0.2, 0.6)
+	else:
+		$PlayerTime.color = Color(0, 0, 0, 0.5)
 
 func _on_play_pressed():
 	get_tree().change_scene_to_file(\"res://main.tscn\")
@@ -47,5 +86,94 @@ text = "Restart"
 [node name="Label" type="Label" parent="." unique_id=2004511726]
 offset_left = 256.0
 offset_top = 64.0
-offset_right = 1024.0
-offset_bottom = 192.0
+offset_right = 960.0
+offset_bottom = 224.0
+
+[node name="GoldTime" type="ColorRect" parent="." unique_id=1886129335]
+offset_left = 256.0
+offset_top = 288.0
+offset_right = 704.0
+offset_bottom = 384.0
+color = Color(1, 0.84, 0, 0.6)
+
+[node name="Label" type="Label" parent="GoldTime" unique_id=343743541]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SilverTime" type="ColorRect" parent="." unique_id=375299583]
+offset_left = 256.0
+offset_top = 416.0
+offset_right = 704.0
+offset_bottom = 512.0
+color = Color(0.75, 0.75, 0.75, 0.6)
+
+[node name="Label" type="Label" parent="SilverTime" unique_id=1559101225]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BronzeTime" type="ColorRect" parent="." unique_id=1457096362]
+offset_left = 256.0
+offset_top = 544.0
+offset_right = 704.0
+offset_bottom = 640.0
+color = Color(0.8, 0.5, 0.2, 0.6)
+
+[node name="Label" type="Label" parent="BronzeTime" unique_id=1824642126]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerTime" type="ColorRect" parent="." unique_id=1323422935]
+offset_left = 256.0
+offset_top = 64.0
+offset_right = 960.0
+offset_bottom = 224.0
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="Label" type="Label" parent="PlayerTime" unique_id=1367366442]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BronzeMedal" type="Sprite2D" parent="." unique_id=1866986219]
+position = Vector2(224, 608)
+texture = ExtResource("4_kaxt3")
+
+[node name="SilverMedal" type="Sprite2D" parent="." unique_id=439528664]
+position = Vector2(224, 480)
+texture = ExtResource("5_2afhe")
+
+[node name="GoldMedal" type="Sprite2D" parent="." unique_id=892635113]
+position = Vector2(224, 352)
+texture = ExtResource("6_nbj2a")
+
+[node name="YourMedal" type="Sprite2D" parent="." unique_id=1166492340]
+position = Vector2(160, 192)
+scale = Vector2(1.4175628, 1.4175627)
+texture = ExtResource("7_f33ud")

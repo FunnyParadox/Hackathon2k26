@@ -51,7 +51,17 @@ var previous_is_on_floor := is_on_floor()
 var throw_target: CharacterBody2D = null
 var raycast_check := RayCast2D.new()
 
+var audio_player_trash = AudioStreamPlayer.new()
+var audio_player_kill = AudioStreamPlayer.new()
+
 func _ready() -> void:
+	add_child(audio_player_trash)
+	audio_player_trash.volume_db = -3.0
+	audio_player_trash.stream = preload("res://sounds/Trash_Collect.mp3")
+	add_child(audio_player_kill)
+	audio_player_trash.volume_db = -1.0
+	audio_player_kill.stream = preload("res://sounds/Hit_Enemy.mp3")
+
 	timer_state = timer_enum.PLAY
 	sprite = get_node("Sprite2D")
 	skate_sprite = get_node("Sprite2DSkate")
@@ -66,6 +76,7 @@ func _on_collect_body_entered(body: Node2D) -> void:
 		if body.life_time >= 0.3:
 			body.kill()
 			collected += 1
+			audio_player_trash.play()
 	if body.is_in_group("enemies"):
 		take_damage(body.position)
 
@@ -158,6 +169,7 @@ func handle_throw(delta: float) -> void:
 			print("target killed: ", throw_target)
 			throw_target.kill()
 			throw_target = null
+			audio_player_kill.play()
 	else:
 		skate_sprite.rotation = 0
 		skate_position = skate_position.move_toward(global_position + Vector2(0, -54).rotated(gravity_angle), delta * THROW_RADIUS)
@@ -322,3 +334,6 @@ func _physics_process(delta: float) -> void:
 		lives = 0
 	if (!lives):
 		death()
+	if global_position.x > 16500:
+		kd.player_time = timer
+		get_tree().change_scene_to_file("res://end_screen.tscn")

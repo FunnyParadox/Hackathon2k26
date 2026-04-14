@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="EcoDash-Hackathon2k26"
-run/main_scene="uid://dqd4aaxh4o1sh"
+run/main_scene="uid://cvsbormqercpp"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]
 
-gl="*uid://1xu5grrtkqxr"
+kd="*uid://c0lgv85qa1jvj"
 
 [display]
 
@@ -27,7 +27,7 @@ window/size/viewport_height=720
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/web_zip_exporter/plugin.cfg")
+enabled=PackedStringArray("res://addons/trash_placer/plugin.cfg", "res://addons/web_zip_exporter/plugin.cfg")
 
 [input]
 

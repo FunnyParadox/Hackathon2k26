@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bqowm0w24c6jl"]
 
 [ext_resource type="Script" uid="uid://w2i723trqtuh" path="res://instances/pecan.gd" id="1_7d3mq"]
-[ext_resource type="Texture2D" uid="uid://ce7bpa3eed3vq" path="res://sprites/Pecan.png" id="2_7d3mq"]
+[ext_resource type="Texture2D" uid="uid://ds4ctaq2ksksj" path="res://sprites/Pecan1.png" id="2_7d3mq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_duq4i"]
 radius = 32.0

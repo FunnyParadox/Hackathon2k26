@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ccjq3ybx3iyxy"]
 
 [ext_resource type="Texture2D" uid="uid://blmexvw3eu0sm" path="res://sprites/4xGrayTexture.png" id="2_oi3di"]
-[ext_resource type="Script" path="res://platforms.gd" id="2_platform"]
+[ext_resource type="Script" uid="uid://dc4vf0oamf48q" path="res://platforms.gd" id="2_platform"]
 [ext_resource type="PackedScene" uid="uid://ce1yurhu7pc80" path="res://instances/badguy.tscn" id="3_oi3di"]
 [ext_resource type="PackedScene" uid="uid://bqowm0w24c6jl" path="res://instances/pecan.tscn" id="4_0b4ue"]
 [ext_resource type="Script" uid="uid://qnkfqqd4v3de" path="res://instances/badguy.gd" id="5_1ainy"]
@@ -298,3 +298,27 @@ position = Vector2(3456, -224)
 
 [node name="CharacterBody2D32" parent="." unique_id=981784844 instance=ExtResource("5_f2txt")]
 position = Vector2(3520, -256)
+
+[node name="@CharacterBody2D@55566" parent="." unique_id=1562016288 instance=ExtResource("5_f2txt")]
+position = Vector2(5760, -224)
+
+[node name="@CharacterBody2D@56632" parent="." unique_id=2069404449 instance=ExtResource("5_f2txt")]
+position = Vector2(5824, -224)
+
+[node name="_CharacterBody2D_58230" parent="." unique_id=1528332230 instance=ExtResource("5_f2txt")]
+position = Vector2(6720, -224)
+
+[node name="@CharacterBody2D@58230" parent="." unique_id=522707180 instance=ExtResource("5_f2txt")]
+position = Vector2(5952, -224)
+
+[node name="@CharacterBody2D@59295" parent="." unique_id=1999792361 instance=ExtResource("5_f2txt")]
+position = Vector2(5888, -224)
+
+[node name="CharacterBody2D3" parent="." unique_id=1849602595 instance=ExtResource("5_f2txt")]
+position = Vector2(5696, -224)
+
+[node name="CharacterBody2D33" parent="." unique_id=290189438 instance=ExtResource("5_f2txt")]
+position = Vector2(6784, -224)
+
+[node name="CharacterBody2D34" parent="." unique_id=813473566 instance=ExtResource("5_f2txt")]
+position = Vector2(6848, -224)
