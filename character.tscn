@@ -8,7 +8,13 @@
 radius = 35.0
 height = 110.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_collect"]
+radius = 35.0
+height = 110.0
+
 [node name="Character" type="CharacterBody2D" unique_id=1458895286]
+collision_layer = 2
+collision_mask = 1
 script = ExtResource("1_glpr6")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1254112791]
@@ -20,6 +26,14 @@ texture = ExtResource("2_sprite")
 position = Vector2(0, -54.375)
 shape = SubResource("CapsuleShape2D_pjt0s")
 debug_color = Color(1, 0, 1, 0.42000002)
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollectShape" type="CollisionShape2D" parent="CollectArea"]
+position = Vector2(0, -54.375)
+shape = SubResource("CapsuleShape2D_collect")
 
 [node name="Sprite2DSkate" type="Sprite2D" parent="." unique_id=600729379]
 visible = false

@@ -10,21 +10,21 @@
 
 [node name="Node2D" type="Node2D" unique_id=515637665]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=897784104]
 script = ExtResource("7_5vw27")
 
-[node name="Layer2" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Layer2" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1939067234]
 motion_scale = Vector2(0.75, 1)
 
-[node name="BackgroundLayer2" type="Sprite2D" parent="ParallaxBackground/Layer2"]
+[node name="BackgroundLayer2" type="Sprite2D" parent="ParallaxBackground/Layer2" unique_id=1735302934]
 position = Vector2(0, -376.625)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_7mycd")
 
-[node name="Layer1" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Layer1" type="ParallaxLayer" parent="ParallaxBackground" unique_id=855307440]
 motion_scale = Vector2(0.5, 1)
 
-[node name="BackgroundLayer1" type="Sprite2D" parent="ParallaxBackground/Layer1"]
+[node name="BackgroundLayer1" type="Sprite2D" parent="ParallaxBackground/Layer1" unique_id=1835930336]
 position = Vector2(0, -376.625)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_272bh")

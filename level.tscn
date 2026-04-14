@@ -27,11 +27,14 @@ polygon = PackedVector2Array(0, 0, 80, 0, 80, 592, 384, 592, 768, 464, 1024, 464
 texture_repeat = 2
 position = Vector2(1232, -720)
 texture = ExtResource("2_oi3di")
-polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1328, 528, 1328, 720, 1216, 720, 176, 720)
+polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1328, 528, 1456, 496, 1520, 464, 1584, 400, 1616, 336, 1648, 208, 1680, -16, 1680, 720, 1328, 720, 1216, 720, 176, 720)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2D2" unique_id=621840519]
 position = Vector2(1232, -720)
-polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1328, 528, 1328, 720, 1216, 720, 176, 720)
+polygon = PackedVector2Array(176, 464, 432, 464, 560, 592, 816, 592, 816, 560, 944, 560, 944, 592, 1072, 592, 1216, 528, 1328, 528, 1456, 496, 1520, 464, 1584, 400, 1616, 336, 1648, 208, 1680, -16, 1680, 720, 1328, 720, 1216, 720, 176, 720)
+
+[node name="CharacterBody2D" parent="Platforms/Platform2D2" unique_id=1562016288 instance=ExtResource("3_oi3di")]
+position = Vector2(352, -128)
 
 [node name="Badguy" parent="." unique_id=254324874 instance=ExtResource("3_oi3di")]
 position = Vector2(2016, -128)

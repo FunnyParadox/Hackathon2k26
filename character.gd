@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 var sprite: Sprite2D
 var collision: CollisionShape2D
+var skate_sprite: Sprite2D
+var skate_position := Vector2(0, 0)
 
 const ACCELERATION = 160.0
 const DECELERATION := 1./3.
@@ -21,6 +23,7 @@ const COYOTE_JUMP := sqrt(2)/10
 
 const BASE_LIVES := 3
 const INVINCIBILITY_TIME := 3.0 # in seconds
+const THROW_RADIUS := 700.0
 const KNOCKBACK_FORCE := 300.0
 
 const DOWN_SLOPE_CHECK := 24
@@ -28,6 +31,8 @@ const DOWN_SLOPE_CHECK := 24
 enum timer_enum { STOP, PLAY, PAUSE }
 var timer_state: timer_enum = timer_enum.STOP
 var timer: float = 0.0
+var collected: int = 0
+var killed: int = 0
 
 var lives: int = BASE_LIVES
 var invincible_frames := -1.0
@@ -42,15 +47,23 @@ var last_acceleration := ACCELERATION_LIMIT
 var direction := 1 # -1: left, 1: right
 var previous_is_on_floor := is_on_floor()
 
+var throw_target: CharacterBody2D = null
 var raycast_check := RayCast2D.new()
 
 func _ready() -> void:
 	timer_state = timer_enum.PLAY
 	sprite = get_node("Sprite2D")
+	skate_sprite = get_node("Sprite2DSkate")
 	collision = get_node("CollisionShape2D")
 	raycast_check.enabled = true
 	raycast_check.force_raycast_update()
 	raycast_check.collision_mask = 1 << 0
+	get_node("CollectArea").body_entered.connect(_on_collect_body_entered)
+
+func _on_collect_body_entered(body: Node2D) -> void:
+	if body.is_in_group("collectibles"):
+		body.kill()
+		collected += 1
 
 func _draw():
 	draw_line(Vector2.ZERO, raycast_check.target_position, Color.RED, 2)
@@ -111,6 +124,39 @@ func handle_acceleration(delta: float, floor_speed: float) -> float:
 		floor_speed = 0
 	return clamp(floor_speed, -MAX_SPEED, MAX_SPEED)
 
+func get_closest_enemy_in_semicircle() -> CharacterBody2D:
+	var forward := Vector2(direction, 0).rotated(gravity_angle)
+	var closest: CharacterBody2D = null
+	var closest_dist := THROW_RADIUS + 1.0
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		var to_enemy: Vector2 = enemy.global_position - global_position
+		var dist := to_enemy.length()
+		if dist <= THROW_RADIUS and to_enemy.dot(forward) >= 0 and dist < closest_dist:
+			closest = enemy
+			closest_dist = dist
+	return closest
+
+func handle_throw(delta: float) -> void:
+	if throw_target:
+		skate_position = skate_position.move_toward(throw_target.global_position, delta * THROW_RADIUS)
+		skate_sprite.rotation += delta * 20
+		if skate_position.distance_to(throw_target.global_position) < 1.0:
+			print("target killed: ", throw_target)
+			throw_target.kill()
+			throw_target = null
+	else:
+		skate_sprite.rotation = 0
+		skate_position = skate_position.move_toward(global_position + Vector2(0, -54).rotated(gravity_angle), delta * THROW_RADIUS)
+	if throwing_frames > 0.0:
+		throwing_frames = move_toward(throwing_frames, 0, delta * 5)
+		return
+	elif Input.is_action_just_released("Throw") and !is_on_floor():
+		var target := get_closest_enemy_in_semicircle()
+		if target:
+			throw_target = target
+			print("target: ", throw_target)
+		throwing_frames = 1.0
+
 func ground_corner_correction(delta: float, floor_dir: Vector2, pre_velocity: Vector2, gravity: Vector2) -> void:
 	# Ground corner correction: step over ledges within WALL_TOLERANCE
 	if is_on_wall():
@@ -128,7 +174,6 @@ func take_damage(floor_dir: Vector2) -> void:
 	lives -= 1
 	velocity.y -= KNOCKBACK_FORCE
 	var wall_side := get_wall_normal().dot(floor_dir)
-	print("wall: ", wall_side)
 	velocity.x = KNOCKBACK_FORCE * (-1 if wall_side < 0 else 1)
 	invincible_frames = INVINCIBILITY_TIME
 	print(invincible_frames)
@@ -173,6 +218,27 @@ func animation_jump(delta: float) -> void:
 					sprite.texture = preload("res://sprites/SkateuseKickFlip3.png")
 			return
 
+func animation_throw() -> void:
+	skate_sprite.global_position = skate_position
+	if (throwing_frames <=0/6.0 and throw_target != null):
+		sprite.texture = preload("res://sprites/SkateuseThrow7.png");
+		skate_sprite.visible = true
+	else:
+		skate_sprite.visible = false
+	if (throwing_frames > 0/6.0):
+		sprite.texture = preload("res://sprites/SkateuseThrow6.png");
+	if (throwing_frames > 1/6.0):
+		sprite.texture = preload("res://sprites/SkateuseThrow5.png");
+	if (throwing_frames > 2/6.0):
+		sprite.texture = preload("res://sprites/SkateuseThrow4.png");
+	if (throwing_frames > 3/6.0):
+		sprite.texture = preload("res://sprites/SkateuseThrow3.png");
+	if (throwing_frames > 4/6.0):
+		sprite.texture = preload("res://sprites/SkateuseThrow2.png");
+	if (throwing_frames > 5/6.0):
+		sprite.texture = preload("res://sprites/SkateuseThrow1.png");
+		
+
 var bkp_sprite_flip_h := 0
 var bkp_jump_force := jump_force
 func _process(delta: float) -> void:
@@ -184,6 +250,7 @@ func _process(delta: float) -> void:
 	sprite.texture = preload("res://sprites/SkateuseBase.png")
 	animation_jump(delta)
 	animation_acceleration()
+	animation_throw()
 	sprite.flip_h = velocity.x < 0
 	if (velocity.x == 0): sprite.flip_h = bkp_sprite_flip_h
 	bkp_jump_force = jump_force
@@ -201,6 +268,7 @@ func _physics_process(delta: float) -> void:
 
 	handle_gravity(delta, gravity)
 	handle_jump(delta, gravity)
+	handle_throw(delta)
 
 	var floor_speed := handle_acceleration(delta, velocity.dot(floor_dir))
 	velocity = gravity * velocity.dot(gravity) + floor_dir * floor_speed
@@ -208,5 +276,5 @@ func _physics_process(delta: float) -> void:
 	var pre_velocity := velocity
 	move_and_slide()
 	previous_is_on_floor = is_on_floor()
-	
+
 	ground_corner_correction(delta, floor_dir, pre_velocity, gravity)
